@@ -1,9 +1,6 @@
 
 ---
 
-### 2️⃣ `requirements.txt`
-
-```text
 # ───────── core ─────────
 numpy>=1.24
 pandas>=2.0
