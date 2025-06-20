@@ -1,7 +1,6 @@
 """
 Data handling module for regression analysis
 Handles dataset preparation, feature processing, and DataLoader creation
-CORRECTED: Use actual dataset column names (Latitud, Longitud)
 """
 
 import numpy as np
@@ -25,7 +24,6 @@ class StructuredFeatureProcessor:
     """
     Processes structured features for regression modeling
     Reproduces the original structured data processing logic
-    CORRECTED: Uses actual dataset column names
     """
     
     def __init__(self):
@@ -37,7 +35,6 @@ class StructuredFeatureProcessor:
     def extract_numeric_features(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Extract and clean numeric features
-        Reproduces the original numeric feature extraction logic with correct column names
         
         Args:
             df: Input DataFrame
@@ -95,7 +92,6 @@ class StructuredFeatureProcessor:
     def prepare_categorical_features(self, df: pd.DataFrame) -> Tuple[List[str], pd.DataFrame]:
         """
         Identify and prepare categorical features
-        Reproduces the original categorical feature selection logic
         
         Args:
             df: Input DataFrame
@@ -129,7 +125,6 @@ class StructuredFeatureProcessor:
     def create_structured_features(self, df: pd.DataFrame) -> np.ndarray:
         """
         Create final structured feature matrix
-        Reproduces the original X_struct creation logic
         
         Args:
             df: Processed DataFrame
@@ -181,7 +176,6 @@ class StructuredFeatureProcessor:
     def fit_scaler(self, X_train: np.ndarray) -> 'StructuredFeatureProcessor':
         """
         Fit scaler on training data
-        Reproduces the original: scaler = StandardScaler().fit(X_struct)
         
         Args:
             X_train: Training feature matrix
@@ -200,7 +194,6 @@ class StructuredFeatureProcessor:
     def transform_features(self, X: np.ndarray) -> np.ndarray:
         """
         Transform features using fitted scaler
-        Reproduces the original: scaler.transform(X_struct)
         
         Args:
             X: Feature matrix to transform
@@ -234,14 +227,12 @@ class StructuredFeatureProcessor:
 class MultimodalDataset(Dataset):
     """
     Custom dataset for multimodal regression
-    Reproduces the original DS class exactly
     """
     
     def __init__(self, structured_features: np.ndarray, face_tensors: torch.Tensor, 
                  targets: np.ndarray):
         """
         Initialize multimodal dataset
-        Reproduces: def __init__(self,S,F,Y): self.S,self.F,self.Y=S.astype(np.float32),F,Y.astype(np.float32)
         
         Args:
             structured_features: Structured feature matrix [N, feature_dim]
@@ -265,14 +256,12 @@ class MultimodalDataset(Dataset):
     def __len__(self) -> int:
         """
         Get dataset length
-        Reproduces: def __len__(self): return len(self.Y)
         """
         return len(self.targets)
     
     def __getitem__(self, idx: int) -> Dict[str, torch.Tensor]:
         """
         Get single sample
-        Reproduces: def __getitem__(self,i): return {'s':torch.from_numpy(self.S[i]),'f':self.F[i],'y':torch.tensor(self.Y[i])}
         
         Args:
             idx: Sample index
@@ -333,7 +322,6 @@ class MultimodalDataHandler:
     def prepare_data_splits(self, df: pd.DataFrame, face_tensors: torch.Tensor) -> Tuple[np.ndarray, np.ndarray]:
         """
         Create train/test splits
-        Reproduces the original train_test_split logic
         
         Args:
             df: DataFrame with target variable
@@ -362,7 +350,6 @@ class MultimodalDataHandler:
     def create_datasets(self, df: pd.DataFrame, face_tensors: torch.Tensor) -> Tuple[MultimodalDataset, MultimodalDataset]:
         """
         Create train and test datasets
-        Reproduces the original dataset creation workflow
         
         Args:
             df: DataFrame with features and targets
@@ -415,7 +402,6 @@ class MultimodalDataHandler:
                            test_dataset: MultimodalDataset) -> Tuple[DataLoader, DataLoader]:
         """
         Create DataLoaders for training and testing
-        Reproduces the original DataLoader creation
         
         Args:
             train_dataset: Training dataset
