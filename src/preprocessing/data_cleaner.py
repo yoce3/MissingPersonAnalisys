@@ -15,7 +15,6 @@ from .config import CLEANING_CONFIG
 class DataCleaner:
     """
     Handles basic data cleaning operations
-    Reproduces the original cleaning logic EXACTLY with better error handling
     """
     
     def __init__(self):
@@ -27,9 +26,6 @@ class DataCleaner:
     def combine_names(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Combine first and last names into full name
-        Reproduces EXACTLY: 
-        datos_combinados['NOMBRES'] = datos_combinados['NOMBRES'].str.cat(datos_combinados['APELLIDOS'], sep=' ')
-        datos_combinados.drop(columns=['APELLIDOS'], inplace=True)
         
         Args:
             df: DataFrame with first_names and last_names columns
@@ -64,8 +60,6 @@ class DataCleaner:
     def extract_numeric_age(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Extract numeric age from age text
-        Reproduces EXACTLY: 
-        datos_combinados['EDAD'] = datos_combinados['EDAD'].str.extract(r'(\d+)', expand=False)
         
         Args:
             df: DataFrame with age_raw column
@@ -98,9 +92,7 @@ class DataCleaner:
     def extract_numeric_height(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Extract numeric height from height text
-        Reproduces EXACTLY: 
-        datos_combinados['ESTATURA'] = datos_combinados['ESTATURA'].str.extract(r'(\d+\.?\d*)', expand=False)
-        
+
         Args:
             df: DataFrame with height_raw column
             
@@ -161,11 +153,7 @@ class DataCleaner:
     def split_datetime_columns(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Split datetime columns into separate date and time columns
-        Reproduces the EXACT original datetime splitting logic:
-        datos_combinados[['Fecha de Denuncia', 'Hora de Denuncia']] = datos_combinados['Fecha'].str.split(' ', n=1, expand=True)
-        datos_combinados[['Fecha de Nacimiento', 'Hora de Nacimiento']] = datos_combinados['F./ NACIMIENTO'].str.split(' ', n=1, expand=True)
-        datos_combinados[['Fecha del Hecho', 'Hora del Hecho']] = datos_combinados['FECHA DEL HECHO'].str.split(' ', n=1, expand=True)
-        
+
         Args:
             df: DataFrame with datetime columns to split
             
@@ -205,12 +193,7 @@ class DataCleaner:
     def remove_processed_columns(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Remove columns that are no longer needed after processing
-        Reproduces the original drop column operations:
-        datos_combinados.drop(columns=['APELLIDOS'], inplace=True)
-        datos_combinados.drop(columns=['Fecha'], inplace=True)
-        datos_combinados.drop(columns=['F./ NACIMIENTO'], inplace=True)
-        datos_combinados.drop(columns=['FECHA DEL HECHO'], inplace=True)
-        
+
         Args:
             df: DataFrame to clean up
             
