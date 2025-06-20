@@ -1,7 +1,6 @@
 """
 Web scraping module for missing persons data
 Handles data extraction from police website pages
-Reproduces the original scraping logic exactly
 """
 
 import requests
@@ -25,7 +24,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 def fetch_page_soup(url: str) -> BeautifulSoup:
     """
     Fetch and parse webpage content
-    Reproduces the original requests.get + BeautifulSoup logic
     
     Args:
         url: URL to fetch
@@ -45,7 +43,6 @@ def fetch_page_soup(url: str) -> BeautifulSoup:
 def extract_case_links_from_main_page(main_page_soup: BeautifulSoup) -> List[str]:
     """
     Extract individual case links from main listing page
-    Reproduces the original enlaces_menores/enlaces_mayores logic exactly
     
     Args:
         main_page_soup: BeautifulSoup object of main page
@@ -68,7 +65,6 @@ def extract_case_links_from_main_page(main_page_soup: BeautifulSoup) -> List[str
 def extract_photo_urls_from_main_page(main_page_soup: BeautifulSoup) -> List[str]:
     """
     Extract photo URLs from main listing page
-    Reproduces the original Fotos_Menores/Fotos_Mayores logic exactly
     
     Args:
         main_page_soup: BeautifulSoup object of main page
@@ -88,7 +84,6 @@ def extract_photo_urls_from_main_page(main_page_soup: BeautifulSoup) -> List[str
 def extract_case_data_from_detail_page(case_url: str) -> List[str]:
     """
     Extract detailed information from individual case page
-    Reproduces the original data extraction logic for each case exactly
     
     Args:
         case_url: URL of individual case page
@@ -171,7 +166,6 @@ def extract_case_data_from_detail_page(case_url: str) -> List[str]:
 def scrape_missing_persons_text_data(category_url: str, category_name: str) -> Tuple[List[List[str]], List[str], List[str]]:
     """
     Scrape all text data from a specific category (minors or adults)
-    Reproduces the original scraping logic exactly
     
     Args:
         category_url: URL of the category page
@@ -213,7 +207,6 @@ def scrape_missing_persons_text_data(category_url: str, category_name: str) -> T
 def scrape_found_persons_data() -> List[List[str]]:
     """
     Scrape data about found persons
-    Reproduces the original found persons extraction logic exactly
     
     Returns:
         List of [name, date, photo_url] for each found person
@@ -246,7 +239,6 @@ def scrape_found_persons_data() -> List[List[str]]:
 def get_column_structure_from_sample_case(sample_category_url: str) -> List[str]:
     """
     Extract column names from a sample case page
-    Reproduces the original column extraction logic exactly
     
     Args:
         sample_category_url: URL of category to sample from
@@ -271,7 +263,6 @@ def get_column_structure_from_sample_case(sample_category_url: str) -> List[str]
 def extract_dataframe_columns_from_sample(soup_sample) -> List[str]:
     """
     Extract column names from a sample page structure
-    Reproduces the original column extraction logic exactly
     
     Args:
         soup_sample: BeautifulSoup object of sample page
