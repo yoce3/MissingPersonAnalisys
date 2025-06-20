@@ -26,13 +26,6 @@ class TemporalProcessor:
     def convert_time_format(self, time_str: str) -> Optional[time]:
         """
         Convert time string to time object
-        Reproduces the original convertir_formato_hora function EXACTLY:
-        
-        def convertir_formato_hora(hora_str):
-            if pd.isnull(hora_str) or hora_str == '':
-                return None
-            hora_str = hora_str.replace('a.m.', 'AM').replace('p.m.', 'PM')
-            return pd.to_datetime(hora_str, format='%I:%M:%S %p').time()
         
         Args:
             time_str: Time string to convert
@@ -58,10 +51,7 @@ class TemporalProcessor:
     def convert_date_columns(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Convert date columns to datetime format
-        Reproduces the EXACT original pd.to_datetime operations:
-        datos_combinados['Fecha del Hecho'] = pd.to_datetime(datos_combinados['Fecha del Hecho'], errors='coerce', format='%d/%m/%Y')
-        datos_combinados['Fecha de Denuncia'] = pd.to_datetime(datos_combinados['Fecha de Denuncia'], errors='coerce', format='%d/%m/%Y')
-        
+
         Args:
             df: DataFrame with date columns to convert
             
@@ -99,10 +89,7 @@ class TemporalProcessor:
     def convert_time_columns(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Convert time columns using the time format converter
-        Reproduces the EXACT original time conversion applications:
-        datos_combinados['Hora del Hecho'] = datos_combinados['Hora del Hecho'].apply(convertir_formato_hora)
-        datos_combinados['Hora de Denuncia'] = datos_combinados['Hora de Denuncia'].apply(convertir_formato_hora)
-        
+
         Args:
             df: DataFrame with time columns to convert
             
@@ -137,13 +124,6 @@ class TemporalProcessor:
                                end_date_col: str, end_time_col: str) -> Optional[float]:
         """
         Calculate hours elapsed between two datetime points
-        Reproduces the original calcular_horas_transcurridas function EXACTLY:
-        
-        def calcular_horas_transcurridas(fila, col_fecha_inicio, col_hora_inicio, col_fecha_fin, col_hora_fin):
-            datetime_inicio = datetime.combine(fila[col_fecha_inicio], fila[col_hora_inicio])
-            datetime_fin = datetime.combine(fila[col_fecha_fin], fila[col_hora_fin])
-            horas_transcurridas = (datetime_fin - datetime_inicio).total_seconds() / 3600
-            return horas_transcurridas
         
         Args:
             row: DataFrame row with datetime information
@@ -223,7 +203,6 @@ class TemporalProcessor:
     def apply_temporal_processing(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Apply all temporal processing operations
-        Reproduces the complete temporal processing workflow from original
         
         Args:
             df: DataFrame to process
