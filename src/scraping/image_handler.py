@@ -1,7 +1,6 @@
 """
 Image handling module for missing persons data scraping
 Handles screenshot capture and image processing using Selenium
-Reproduces the original image capture logic exactly
 """
 
 import time
@@ -22,7 +21,6 @@ from .config import get_chrome_driver_options, PHOTO_XPATH
 def initialize_chrome_driver():
     """
     Initialize Chrome WebDriver with the same options as original
-    Reproduces the original iniciar_driver function
     
     Returns:
         Chrome WebDriver instance
@@ -34,7 +32,6 @@ def initialize_chrome_driver():
 def capture_image_screenshot(driver, page_url: str) -> Optional[np.ndarray]:
     """
     Capture screenshot of specific image on a webpage
-    Reproduces the original tomar_screenshot function exactly
     
     Args:
         driver: Selenium WebDriver instance
@@ -69,7 +66,6 @@ def capture_image_screenshot(driver, page_url: str) -> Optional[np.ndarray]:
 def capture_images_from_link_list(case_links: List[str], description: str = "Processing links") -> List[np.ndarray]:
     """
     Capture images from a list of URLs with progress tracking
-    Reproduces the original image capture loop exactly
     
     Args:
         case_links: List of URLs to process
@@ -109,7 +105,6 @@ def capture_images_from_link_list(case_links: List[str], description: str = "Pro
 def capture_images_with_error_recovery(case_links: List[str], description: str = "Processing links") -> List[np.ndarray]:
     """
     Capture images from URLs with error recovery and driver restart
-    Reproduces the original error handling logic for mayores
     
     Args:
         case_links: List of URLs to process
