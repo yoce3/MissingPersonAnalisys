@@ -15,7 +15,6 @@ from .config import CLEANING_CONFIG
 class TemporalProcessor:
     """
     Handles all temporal data processing operations
-    Reproduces the original date/time conversion and calculation logic EXACTLY
     """
     
     def __init__(self):
@@ -160,7 +159,6 @@ class TemporalProcessor:
     def process_found_persons_temporal_data(self, found_df: pd.DataFrame) -> pd.DataFrame:
         """
         Process temporal data for found persons
-        Reproduces the original found persons datetime splitting logic
         
         Args:
             found_df: Found persons DataFrame
