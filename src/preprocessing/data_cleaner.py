@@ -1,7 +1,6 @@
 """
 Data cleaning module for missing persons preprocessing
 Handles basic data cleaning operations like combining names, extracting numeric values
-Reproduces the original cleaning logic EXACTLY
 """
 
 import pandas as pd
@@ -42,7 +41,6 @@ class DataCleaner:
             df_cleaned['first_names'] = df_cleaned['first_names'].fillna('')
             df_cleaned['last_names'] = df_cleaned['last_names'].fillna('')
             
-            # Reproduce EXACT original logic: str.cat with separator
             df_cleaned['full_name'] = df_cleaned['first_names'].str.cat(
                 df_cleaned['last_names'], sep=' '
             )
@@ -72,7 +70,6 @@ class DataCleaner:
         if 'age_raw' in df.columns:
             print("Extracting numeric age values...")
             
-            # Reproduce EXACT original regex extraction
             df_cleaned['age_cleaned'] = df_cleaned['age_raw'].astype(str).str.extract(
                 self.age_pattern, expand=False
             )
@@ -104,7 +101,6 @@ class DataCleaner:
         if 'height_raw' in df.columns:
             print("Extracting numeric height values...")
             
-            # Reproduce EXACT original regex extraction  
             df_cleaned['height_cleaned'] = df_cleaned['height_raw'].astype(str).str.extract(
                 self.height_pattern, expand=False
             )
@@ -173,7 +169,6 @@ class DataCleaner:
             if original_col in df.columns:
                 print(f"Splitting {original_col} into date and time...")
                 
-                # Reproduce EXACT original split logic: str.split(' ', n=1, expand=True)
                 split_result = df_cleaned[original_col].astype(str).str.split(' ', n=1, expand=True)
                 
                 if split_result.shape[1] >= 2:
@@ -215,7 +210,6 @@ class DataCleaner:
     def apply_basic_cleaning(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Apply all basic cleaning operations in sequence
-        Reproduces the EXACT original cleaning workflow
         
         Args:
             df: Raw DataFrame to clean
@@ -225,18 +219,14 @@ class DataCleaner:
         """
         print("=== Starting Basic Data Cleaning ===")
         
-        # Step 1: Combine names (reproducing the name concatenation)
         df_cleaned = self.combine_names(df)
         
-        # Step 2: Extract numeric values (reproducing the regex extractions)
         df_cleaned = self.extract_numeric_age(df_cleaned)
         df_cleaned = self.extract_numeric_height(df_cleaned)
         df_cleaned = self.extract_numeric_weight(df_cleaned)  # if weight column exists
         
-        # Step 3: Split datetime columns (reproducing the datetime splits)
         df_cleaned = self.split_datetime_columns(df_cleaned)
         
-        # Step 4: Remove processed columns (reproducing the drops)
         df_cleaned = self.remove_processed_columns(df_cleaned)
         
         print("=== Basic Data Cleaning Complete ===")
