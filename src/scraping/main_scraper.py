@@ -1,6 +1,5 @@
 """
 Main scraping script for missing persons data collection
-Reproduces the original notebook workflow exactly
 """
 
 import os
@@ -27,21 +26,7 @@ from .utils import (
 
 
 def main_scraping_workflow():
-    """
-    Main execution function that reproduces the original notebook workflow exactly
-    
-    The original workflow was:
-    1. Fetch main pages for minors and adults
-    2. Extract case links
-    3. Get column structure from sample case
-    4. Capture images for minors
-    5. Extract text data for minors
-    6. Capture images for adults  
-    7. Extract text data for adults
-    8. Combine and process all data
-    9. Process found persons data
-    10. Save everything to CSV files
-    """
+
     print("=== Missing Persons Data Collection Started ===")
     print("Reproducing original notebook workflow exactly...")
     
@@ -147,7 +132,6 @@ def process_and_combine_all_data(minor_text_data: List[List[str]],
                                column_names: List[str]) -> pd.DataFrame:
     """
     Process and combine all scraped data into final DataFrame
-    Reproduces the original data combination logic exactly
     
     Returns:
         Final DataFrame with all data combined
@@ -220,7 +204,6 @@ def process_and_combine_all_data(minor_text_data: List[List[str]],
 def create_found_persons_dataframe(found_persons_data: List[List[str]]) -> pd.DataFrame:
     """
     Create DataFrame for found persons data
-    Reproduces the original df_ubicados creation
     
     Args:
         found_persons_data: List of [name, date, photo_url] for each found person
@@ -240,7 +223,6 @@ def create_found_persons_dataframe(found_persons_data: List[List[str]]) -> pd.Da
 def save_all_datasets(missing_persons_df: pd.DataFrame, found_persons_df: pd.DataFrame):
     """
     Save all datasets to CSV files
-    Reproduces the original CSV saving logic exactly
     
     Args:
         missing_persons_df: Main missing persons dataset
