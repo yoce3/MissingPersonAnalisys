@@ -1,7 +1,6 @@
 """
 Multimodal embeddings module for clustering analysis
 Handles image and text embedding extraction using deep learning models
-CORREGIDO: Usar columnas correctas del dataset actual
 """
 
 import numpy as np
