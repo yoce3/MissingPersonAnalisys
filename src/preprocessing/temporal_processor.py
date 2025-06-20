@@ -1,7 +1,6 @@
 """
 Temporal data processing module for missing persons preprocessing
 Handles date/time conversions and temporal calculations
-Reproduces the original date/time conversion logic EXACTLY
 """
 
 import pandas as pd
@@ -32,16 +31,13 @@ class TemporalProcessor:
         Returns:
             time object or None if conversion fails
         """
-        # Reproduce EXACT original null check
         if pd.isnull(time_str) or time_str == '':
             return None
         
-        # Reproduce EXACT original time format replacement
         time_str_cleaned = str(time_str)
         time_str_cleaned = time_str_cleaned.replace('a.m.', 'AM').replace('p.m.', 'PM')
         
         try:
-            # Reproduce EXACT original time parsing: pd.to_datetime(..., format='%I:%M:%S %p').time()
             datetime_obj = pd.to_datetime(time_str_cleaned, format=self.time_format_12h)
             return datetime_obj.time()
         except:
@@ -59,7 +55,6 @@ class TemporalProcessor:
         """
         df_converted = df.copy()
         
-        # Date columns to convert (reproducing EXACT original conversions)
         date_columns_to_convert = [
             'incident_date',     # equivalent to 'Fecha del Hecho'
             'report_date',       # equivalent to 'Fecha de Denuncia'
@@ -70,7 +65,6 @@ class TemporalProcessor:
             if date_col in df.columns:
                 print(f"Converting {date_col} to datetime format...")
                 
-                # Reproduce EXACT original: pd.to_datetime(..., errors='coerce', format='%d/%m/%Y')
                 df_converted[date_col] = pd.to_datetime(
                     df_converted[date_col], 
                     errors='coerce', 
@@ -97,7 +91,6 @@ class TemporalProcessor:
         """
         df_converted = df.copy()
         
-        # Time columns to convert (reproducing EXACT original conversions)
         time_columns_to_convert = [
             'incident_time',     # equivalent to 'Hora del Hecho'
             'report_time',       # equivalent to 'Hora de Denuncia'
@@ -108,7 +101,6 @@ class TemporalProcessor:
             if time_col in df.columns:
                 print(f"Converting {time_col} to time format...")
                 
-                # Reproduce EXACT original: .apply(convertir_formato_hora)
                 df_converted[time_col] = df_converted[time_col].apply(self.convert_time_format)
                 
                 # Count successful conversions
@@ -144,11 +136,9 @@ class TemporalProcessor:
             if pd.isnull(start_date) or pd.isnull(start_time) or pd.isnull(end_date) or pd.isnull(end_time):
                 return None
             
-            # Reproduce EXACT original: datetime.combine(fila[col_fecha_inicio], fila[col_hora_inicio])
             datetime_inicio = datetime.combine(start_date.date(), start_time)
             datetime_fin = datetime.combine(end_date.date(), end_time)
             
-            # Reproduce EXACT original: (datetime_fin - datetime_inicio).total_seconds() / 3600
             horas_transcurridas = (datetime_fin - datetime_inicio).total_seconds() / 3600
             
             return horas_transcurridas
@@ -174,7 +164,6 @@ class TemporalProcessor:
         print("Processing found persons temporal data...")
         
         # Split found datetime into date and time components
-        # Reproduce original split logic: .str.split(' ', n=1, expand=True)
         if 'found_datetime_raw' in df_processed.columns:
             split_result = df_processed['found_datetime_raw'].astype(str).str.split(' ', n=1, expand=True)
             
@@ -210,10 +199,8 @@ class TemporalProcessor:
         """
         print("=== Starting Temporal Data Processing ===")
         
-        # Step 1: Convert date columns (reproducing the pd.to_datetime calls)
         df_processed = self.convert_date_columns(df)
         
-        # Step 2: Convert time columns (reproducing the .apply(convertir_formato_hora) calls)
         df_processed = self.convert_time_columns(df_processed)
         
         print("=== Temporal Data Processing Complete ===")
