@@ -73,7 +73,6 @@ def convert_image_to_json(serialized_image: bytes) -> str:
 def display_sample_images(image_matrices: List[np.ndarray], num_samples: int = 5) -> None:
     """
     Display a sample of images from the collected matrices
-    Reproduces the original mostrar_imagenes function
     
     Args:
         image_matrices: List of image matrices to sample from
@@ -121,7 +120,6 @@ def save_dataframe_to_csv(dataframe: pd.DataFrame, file_path: str,
                          separator: str = ';', encoding: str = 'utf-8-sig') -> None:
     """
     Save DataFrame to CSV with consistent formatting
-    Reproduces the original CSV saving logic
     
     Args:
         dataframe: DataFrame to save
@@ -148,7 +146,6 @@ def save_dataframe_to_csv(dataframe: pd.DataFrame, file_path: str,
 def process_found_persons_data(soup_found_persons) -> List[List[str]]:
     """
     Extract found persons data from soup object
-    Reproduces original found persons extraction logic
     
     Args:
         soup_found_persons: BeautifulSoup object of found persons page
