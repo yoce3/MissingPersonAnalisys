@@ -1,7 +1,6 @@
 """
 Face processing module for regression analysis
 Handles face detection, cropping, and preprocessing using MTCNN
-CORRECTED: Use pickle + base64 decoding method (same as clustering)
 """
 
 import numpy as np
@@ -25,7 +24,6 @@ class FaceProcessor:
     """
     Handles face detection and cropping using MTCNN
     Reproduces the original face processing logic with batch capabilities
-    CORRECTED: Uses pickle + base64 decoding method
     """
     
     def __init__(self):
@@ -52,7 +50,6 @@ class FaceProcessor:
     def crop_single_face(self, serialized_image: str) -> torch.Tensor:
         """
         Extract and crop face from a single serialized image
-        CORRECTED: Use pickle + base64 decoding method
         
         Args:
             serialized_image: JSON string containing serialized image data
@@ -130,7 +127,6 @@ class FaceProcessor:
                         image_column: str = 'serialized_image') -> torch.Tensor:
         """
         Crop faces from a batch of images specified by indices
-        Reproduces the original batch_crop function exactly
         
         Args:
             indices: List of DataFrame indices to process
@@ -166,7 +162,6 @@ class FaceProcessor:
                                image_column: str = 'serialized_image') -> Tuple[torch.Tensor, torch.Tensor]:
         """
         Process faces for train and test splits
-        Reproduces the original F_tr, F_te = batch_crop(idx_tr), batch_crop(idx_te) logic
         
         Args:
             df: DataFrame containing image data
