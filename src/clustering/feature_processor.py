@@ -1,7 +1,6 @@
 """
 Feature processing module for clustering analysis
 Handles structured data preparation, feature extraction, and encoding
-CORREGIDO: Usar columnas correctas del dataset y hacer grid search opcional
 """
 
 import pandas as pd
