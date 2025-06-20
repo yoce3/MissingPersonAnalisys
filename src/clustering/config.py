@@ -1,6 +1,5 @@
 """
 Configuration file for missing persons clustering analysis
-CORREGIDO: Usar las columnas correctas del dataset actual
 """
 
 import os
