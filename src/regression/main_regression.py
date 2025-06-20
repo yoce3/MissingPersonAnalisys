@@ -1,6 +1,5 @@
 """
 Main regression script for missing persons analysis
-Reproduces EXACTLY the notebook workflow
 """
 
 import os
