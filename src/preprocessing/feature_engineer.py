@@ -1,7 +1,6 @@
 """
 Feature engineering module for missing persons preprocessing
 Handles creation of target variables and advanced features
-Reproduces the original notebook logic EXACTLY
 """
 
 import pandas as pd
@@ -15,7 +14,6 @@ from .temporal_processor import TemporalProcessor
 class FeatureEngineer:
     """
     Handles feature engineering operations including target variable creation
-    Reproduces the original appeared status and hours calculation logic EXACTLY
     """
     
     def __init__(self):
@@ -24,9 +22,6 @@ class FeatureEngineer:
     def create_appeared_status(self, missing_df: pd.DataFrame, found_df: pd.DataFrame) -> pd.DataFrame:
         """
         Create appeared status based on name and photo URL matching
-        Reproduces the original apareció logic EXACTLY:
-        datos_combinados['Aparecido'] = datos_combinados['NOMBRES'].isin(datos_aparecidos['Nombre']) & 
-        (datos_combinados['url'].isin(datos_aparecidos['Img']))
         
         Args:
             missing_df: Missing persons DataFrame
@@ -45,9 +40,7 @@ class FeatureEngineer:
         
         missing_df_with_status = missing_df.copy()
         
-        # Reproduce EXACT original logic: 
-        # datos_combinados['Aparecido'] = datos_combinados['NOMBRES'].isin(datos_aparecidos['Nombre']) & 
-        # (datos_combinados['url'].isin(datos_aparecidos['Img']))
+
         
         name_matches = missing_df_with_status['full_name'].isin(found_df['full_name'])
         photo_matches = missing_df_with_status['photo_url'].isin(found_df['photo_url'])
@@ -65,9 +58,6 @@ class FeatureEngineer:
     def add_found_persons_temporal_data(self, missing_df: pd.DataFrame, found_df: pd.DataFrame) -> pd.DataFrame:
         """
         Add temporal data from found persons to missing persons DataFrame
-        Reproduces the EXACT original logic:
-        datos_combinados['Fecha de Aparición'] = datos_aparecidos.loc[datos_aparecidos['Nombre'].isin(datos_combinados['NOMBRES']), 'Fecha'].str.split(' ', n=1, expand=True)[0]
-        datos_combinados['Hora de Aparición'] = datos_aparecidos.loc[datos_aparecidos['Nombre'].isin(datos_combinados['NOMBRES']), 'Fecha'].str.split(' ', n=1, expand=True)[1]
         
         Args:
             missing_df: Missing persons DataFrame with appeared_status
@@ -93,9 +83,6 @@ class FeatureEngineer:
         # Initialize found temporal columns with NaN/None
         missing_df_enhanced['found_date'] = pd.NaT
         missing_df_enhanced['found_time'] = None
-        
-        # Reproduce EXACT original logic
-        # Original: datos_combinados['Fecha de Aparición'] = datos_aparecidos.loc[datos_aparecidos['Nombre'].isin(datos_combinados['NOMBRES']), 'Fecha'].str.split(' ', n=1, expand=True)[0]
         
         # Get subset of found persons whose names are in missing persons
         matching_found = found_df_processed[found_df_processed['full_name'].isin(missing_df_enhanced['full_name'])]
@@ -125,11 +112,7 @@ class FeatureEngineer:
     def calculate_hours_to_appear(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Calculate hours from incident to appearance
-        Reproduces the EXACT original logic:
-        sub_datos_aparicion = datos_combinados.dropna(subset=['Fecha de Aparición', 'Hora de Aparición']).copy()
-        sub_datos_aparicion['Horas para Aparecer'] = sub_datos_aparicion.apply(...)
-        datos_combinados.loc[sub_datos_aparicion.index, 'Horas para Aparecer'] = sub_datos_aparicion['Horas para Aparecer']
-        
+
         Args:
             df: DataFrame with incident and found temporal data
             
@@ -140,7 +123,6 @@ class FeatureEngineer:
         
         df_with_calculation = df.copy()
         
-        # Reproduce EXACT original: sub_datos_aparicion = datos_combinados.dropna(subset=['Fecha de Aparición', 'Hora de Aparición']).copy()
         required_columns = ['found_date', 'found_time']  # equivalent to 'Fecha de Aparición', 'Hora de Aparición'
         subset_for_calculation = df_with_calculation.dropna(subset=required_columns).copy()
         
@@ -157,7 +139,6 @@ class FeatureEngineer:
             df_with_calculation['hours_to_appear'] = np.nan
             return df_with_calculation
         
-        # Reproduce original calculation logic
         subset_with_incident['hours_to_appear'] = subset_with_incident.apply(
             lambda row: self.temporal_processor.calculate_hours_elapsed(
                 row, 'incident_date', 'incident_time', 'found_date', 'found_time'
@@ -165,7 +146,6 @@ class FeatureEngineer:
             axis=1
         )
         
-        # Reproduce EXACT original: datos_combinados.loc[sub_datos_aparicion.index, 'Horas para Aparecer'] = ...
         df_with_calculation['hours_to_appear'] = np.nan
         df_with_calculation.loc[subset_with_incident.index, 'hours_to_appear'] = subset_with_incident['hours_to_appear']
         
@@ -177,11 +157,7 @@ class FeatureEngineer:
     def calculate_hours_to_report(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Calculate hours from incident to report (MISSING from original implementation!)
-        Reproduces the EXACT original logic:
-        sub_datos_denuncia = datos_combinados.dropna(subset=['Fecha del Hecho', 'Hora del Hecho', 'Fecha de Denuncia', 'Hora de Denuncia']).copy()
-        sub_datos_denuncia['Horas para Denunciar'] = sub_datos_denuncia.apply(...)
-        datos_combinados.loc[sub_datos_denuncia.index, 'Horas para Denunciar'] = sub_datos_denuncia['Horas para Denunciar']
-        
+
         Args:
             df: DataFrame with incident and report temporal data
             
@@ -192,7 +168,6 @@ class FeatureEngineer:
         
         df_with_calculation = df.copy()
         
-        # Reproduce EXACT original: sub_datos_denuncia = datos_combinados.dropna(subset=[...]).copy()
         required_columns = ['incident_date', 'incident_time', 'report_date', 'report_time']
         subset_for_calculation = df_with_calculation.dropna(subset=required_columns).copy()
         
@@ -201,7 +176,6 @@ class FeatureEngineer:
             df_with_calculation['hours_to_report'] = np.nan
             return df_with_calculation
         
-        # Reproduce original calculation logic
         subset_for_calculation['hours_to_report'] = subset_for_calculation.apply(
             lambda row: self.temporal_processor.calculate_hours_elapsed(
                 row, 'incident_date', 'incident_time', 'report_date', 'report_time'
@@ -209,7 +183,6 @@ class FeatureEngineer:
             axis=1
         )
         
-        # Reproduce EXACT original: datos_combinados.loc[sub_datos_denuncia.index, 'Horas para Denunciar'] = ...
         df_with_calculation['hours_to_report'] = np.nan
         df_with_calculation.loc[subset_for_calculation.index, 'hours_to_report'] = subset_for_calculation['hours_to_report']
         
@@ -274,7 +247,6 @@ class FeatureEngineer:
     def apply_feature_engineering(self, missing_df: pd.DataFrame, found_df: pd.DataFrame) -> pd.DataFrame:
         """
         Apply complete feature engineering workflow
-        Reproduces the EXACT original feature creation workflow
         
         Args:
             missing_df: Missing persons DataFrame
