@@ -18,7 +18,6 @@ from .config import (
 class DataLoader:
     """
     Handles loading and combining CSV files from raw data directories
-    Reproduces the original data combination logic with better error handling
     """
     
     def __init__(self):
@@ -28,7 +27,6 @@ class DataLoader:
     def load_and_combine_missing_persons_data(self) -> pd.DataFrame:
         """
         Load and combine all missing persons CSV files from raw directory
-        Reproduces the original logic: for archivo in os.listdir(directorio)...
         
         Returns:
             Combined DataFrame with all missing persons data
@@ -41,7 +39,6 @@ class DataLoader:
         combined_missing_data = pd.DataFrame()
         csv_files_found = []
         
-        # Reproduce original logic: for archivo in os.listdir(directorio)
         for filename in os.listdir(self.missing_persons_dir):
             if filename.endswith('.csv'):
                 file_path = os.path.join(self.missing_persons_dir, filename)
@@ -51,7 +48,6 @@ class DataLoader:
                     # Load CSV with same parameters as original
                     df_file = pd.read_csv(file_path, delimiter=CSV_DELIMITER, encoding=CSV_ENCODING)
                     
-                    # Combine data (reproducing original concat logic)
                     if combined_missing_data.empty:
                         combined_missing_data = df_file
                     else:
@@ -69,7 +65,6 @@ class DataLoader:
         
         print(f"Combined {len(csv_files_found)} files into {len(combined_missing_data)} total records")
         
-        # Remove duplicates (reproducing original drop_duplicates)
         initial_count = len(combined_missing_data)
         combined_missing_data = combined_missing_data.drop_duplicates()
         duplicates_removed = initial_count - len(combined_missing_data)
@@ -82,7 +77,6 @@ class DataLoader:
     def load_and_combine_found_persons_data(self) -> pd.DataFrame:
         """
         Load and combine all found persons CSV files from raw directory
-        Reproduces the original found persons loading logic
         
         Returns:
             Combined DataFrame with all found persons data
@@ -95,14 +89,12 @@ class DataLoader:
         combined_found_data = pd.DataFrame()
         csv_files_found = []
         
-        # Reproduce original logic: for archivo in os.listdir(directorio_aparecidos)
         for filename in os.listdir(self.found_persons_dir):
             if filename.endswith('.csv'):
                 file_path = os.path.join(self.found_persons_dir, filename)
                 csv_files_found.append(filename)
                 
                 try:
-                    # Load and concatenate (reproducing original logic)
                     df_file = pd.read_csv(file_path, delimiter=CSV_DELIMITER, encoding=CSV_ENCODING)
                     combined_found_data = pd.concat([combined_found_data, df_file], ignore_index=True)
                     
