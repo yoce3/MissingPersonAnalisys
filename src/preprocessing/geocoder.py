@@ -28,7 +28,6 @@ from .config import GEOCODING_CONFIG
 class GeoCoder:
     """
     Handles geocoding operations for missing persons data
-    Reproduces the original geocoding workflow exactly with CORRECT shapefile handling
     """
     
     def __init__(self, shapefile_path: Optional[str] = None):
