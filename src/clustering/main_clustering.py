@@ -23,24 +23,12 @@ from .visualization import ClusteringVisualizer, create_clustering_report
 
 def main_clustering_workflow() -> Tuple[pd.DataFrame, Dict[str, Any]]:
     """
-    Main clustering workflow that reproduces the original notebook logic exactly
     
-    The original workflow was:
-    1. Load dataset and create binary target
-    2. Train/test split with stratification
-    3. Process structured features and feature selection
-    4. Extract image embeddings using ResNet50
-    5. Extract text embeddings using SentenceTransformer
-    6. Scale and combine modalities
-    7. Optimize GMM hyperparameters for each modality
-    8. Evaluate clustering results
-    9. Create visualizations
     
     Returns:
         Tuple of (results_dataframe, workflow_info)
     """
     print("=== Missing Persons Clustering Analysis Started ===")
-    print("Reproducing original clustering notebook workflow...")
     
     try:
         # Setup
