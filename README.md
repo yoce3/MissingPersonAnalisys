@@ -94,8 +94,8 @@ The notebooks call the exact same functions as the CLI, save to the same `data/`
 | Phase | CPU | GPU (optional) | RAM |
 |-------|-----|----------------|-----|
 | Scraper | low | – | ≤2 GB |
-| Pre‑processing | medium | – | ≥8 GB |
-| Embeddings & Clustering | medium | CUDA accelerates ResNet + Sentence‑BERT | ≥16 GB |
+| Pre‑processing | medium | – | ≥4 GB |
+| Embeddings & Clustering | medium | CUDA accelerates ResNet + Sentence‑BERT | ≥6 GB |
 | Regression | low | optional | ≥4 GB |
 
 ---
@@ -120,3 +120,4 @@ If you build on this work, please cite the repository and any related publicatio
 ## ✒️ Credits
 
 Research Assistant Team, Universidad del Pacífico, Lima 🇵🇪 (2025)
+
