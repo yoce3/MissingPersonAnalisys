@@ -5,7 +5,7 @@ Developed for academic research at Universidad del Pacífico (2025).
 
 ---
 
-## 📂 Project Layout
+##  Project Layout
 
 ```
 .
@@ -28,7 +28,7 @@ Each stage has its own `main_<stage>.py` entry‑point plus a `config.py` holdin
 
 ---
 
-## ⚡ Quick Start
+##  Quick Start
 
 ### 1 · Set up a fresh environment
 
@@ -78,7 +78,7 @@ The notebooks call the exact same functions as the CLI, save to the same `data/`
 
 ---
 
-## 🔧 Key Configuration Knobs
+##  Key Configuration Knobs
 
 | Stage | What to tweak (in `config.py`) |
 |-------|--------------------------------|
@@ -89,7 +89,7 @@ The notebooks call the exact same functions as the CLI, save to the same `data/`
 
 ---
 
-## 📊 Hardware Requirements
+##  Hardware Requirements
 
 | Phase | CPU | GPU (optional) | RAM |
 |-------|-----|----------------|-----|
@@ -100,7 +100,7 @@ The notebooks call the exact same functions as the CLI, save to the same `data/`
 
 ---
 
-## 🩺 Troubleshooting
+##  Troubleshooting
 
 | Symptom | Likely cause | Quick fix |
 |---------|--------------|-----------|
@@ -111,13 +111,14 @@ The notebooks call the exact same functions as the CLI, save to the same `data/`
 
 ---
 
-## 📜 License
+##  License
 
 If you build on this work, please cite the repository and any related publication.
 
 ---
 
-## ✒️ Credits
+##  Credits
 
 Research Assistant Team, Universidad del Pacífico, Lima 🇵🇪 (2025)
+
 
