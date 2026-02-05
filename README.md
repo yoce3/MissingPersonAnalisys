@@ -117,8 +117,6 @@ If you build on this work, please cite the repository and any related publicatio
 
 ---
 
-##  Credits
 
-Research Assistant Team, Universidad del Pacífico, Lima 🇵🇪 (2025)
 
 
